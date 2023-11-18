@@ -15,11 +15,11 @@ jobs:
   testing:
     name: "Check Requirements for ${{ github.event.inputs.version }}"
     outputs:
-      version: ${{ steps.not_work_1.outputs.version }}
+      version: ${{ steps.working_1.outputs.version }}
     runs-on: ubuntu-latest
     steps:
       - name: Funktioniert nicht!
-        id: not_work_1
+        id: working_1
         run: |
           echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
           # Direkte Ausgabe
@@ -31,5 +31,11 @@ jobs:
           echo ${{ env.version }}
           # ist leer
 
-          VERSION="${{ github.event.inputs.version }}"
+          version="${{ github.event.inputs.version }}"
+          echo $version
+      - name: Funktioniert nicht!
+        id: not_work_1
+        run: |
+          echo ${{needs.testing.outputs.version}}
+          echo ${{ env.version }}
           echo $VERSION
