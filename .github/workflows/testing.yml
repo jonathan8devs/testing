@@ -25,6 +25,8 @@ jobs:
           # Direkte Ausgabe
           echo ${{needs.testing.outputs.version}}
           # ist leer
+          echo ${{steps.working_1.outputs.version}}
+
 
           echo "version=${{ github.event.inputs.version }}" >> $GITHUB_ENV
           # Direkte Ausgabe
@@ -37,5 +39,6 @@ jobs:
         id: not_work_1
         run: |
           echo ${{needs.testing.outputs.version}}
+          echo ${{steps.working_1.outputs.version}}
           echo ${{ env.version }}
           echo $VERSION
