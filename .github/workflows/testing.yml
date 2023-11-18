@@ -31,5 +31,5 @@ jobs:
           echo ${{ env.version }}
           # ist leer
 
-          VERSION = "${{ github.event.inputs.version }}""
+          VERSION = "${{ github.event.inputs.version }}"
           echo $VERSION
