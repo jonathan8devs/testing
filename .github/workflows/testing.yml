@@ -1,0 +1,35 @@
+name: "Variablen innerhalb von Github Actions"
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        type: boolean
+        description: "dev-Branch: There have been changes to the dev branch since the last release"
+      version:
+        description: 'Version: Enter the version number (format: major.minor.patch)'
+        required: true
+      overwrite:
+        type: boolean
+        description: "Overwrite: An already released version should be overwritten"
+jobs:
+  testing:
+    name: "Check Requirements for ${{ github.event.inputs.version }}"
+    outputs:
+      version: ${{ steps.not_work_1.outputs.version }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Funktioniert nicht!
+        id: not_work_1
+        run: |
+          echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+          # Direkte Ausgabe
+          echo ${{needs.testing.outputs.version}}
+          # ist leer
+
+          echo "version=${{ github.event.inputs.version }}" >> $GITHUB_ENV
+          # Direkte Ausgabe
+          echo ${{env.version}}
+          # ist leer
+
+          version = ${{ github.event.inputs.version }}
+          echo $version
