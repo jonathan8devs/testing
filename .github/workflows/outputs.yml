@@ -1,4 +1,3 @@
-# https://docs.github.com/en/actions/using-jobs/defining-outputs-for-jobs#example-defining-outputs-for-a-job
 name: "Outputs in Github Action"
 on:
   workflow_dispatch:
@@ -11,7 +10,8 @@ jobs:
     name: Erster Job
     runs-on: ubuntu-latest
     steps:
-      - name:
+      - name: First Step from first Job
+        id: job_1_step_1
         run: |
           echo "An dieser Stelle nehme ich das Inputfield für die weitere Verwendung als Output"
           echo 'Das Inputfield kann via ${{ github.event.inputs.version }} abgerufen werden'
