@@ -19,8 +19,8 @@ jobs:
           echo "Nun schreibe ich den Inhalt von $""{{ github.event.inputs.version }} in die Outputs"
           echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
           echo "In dem Step in welchem in die Outputs definiert wurden können diese nicht abgerufen werden"
-          echo "Innerhalb dieses Steps wird $""{{ steps.job_1_step_1.outputs.test }} nicht ausgegeben:"
-          echo ${{ steps.job_1_step_1.outputs.test }}
+          echo "Innerhalb dieses Steps wird $""{{ steps.job_1_step_1.outputs.version }} nicht ausgegeben:"
+          echo ${{ steps.job_1_step_1.outputs.version }}
           echo "Auch die globale Variable, welche nicht den Step sondern den Job als Referenz hat $""{{needs.first_job.outputs.version}}, wird nicht ausgegeben:"
           echo ${{needs.first_job.outputs.version}}
           echo "Daraus ergibt sich, dass innerhalb des Steps, in welcher das Output definiert wurde man sich mit Variablen behelfen muss:"
@@ -29,3 +29,8 @@ jobs:
           echo "Nun habe ich $""{{ github.event.inputs.version }} in $""VERSION geschrieben und diese enthält nun $VERSION"
           echo ""
           echo "Ich kann festhalten, dass innerhalb eines Steps eines Jobs die ein Wert in die Outputs geschrieben werden kann aber innerhalb des Steps eine extra Variable definiert werden muss um flexibel zu agieren."
+      - name: Second Step from first Job
+        id: job_1_step_2
+        run: |
+          echo "An dieser Stelle starte ich den 2 Step."
+          echo ""
