@@ -51,5 +51,16 @@ jobs:
           echo "Diese Ausgabe ist leer, da ich innerhalb vom ersten Job das Output nicht übergeben habe. Das möchte ich mal an dieser Stelle tun."
           echo "Nun schreibe ich den Inhalt von $""{{ github.event.inputs.version }} in die Outputs. Dieses mal habe ich auch in second_job die outputs übergeben."
           echo "version=${{github.event.inputs.version}}" >> $GITHUB_OUTPUT
+          echo "Um dies nun zu überprüfen muss ich ein neuen Job öffnen"
     outputs:
       version: ${{ steps.job_2_step_1.outputs.version }}
+  third_job:
+    name: Dritter Job
+    needs: second_job
+    runs-on: ubuntu-latest
+    steps:
+      - name: First Step from third Job
+        id: job_3_step_1
+        run: |
+          echo "Ich beginne als erstes mal mit der Job-referenzierten Variable $""{{needs.second_job.outputs.version}}. Dieses habe ich explizit definiert."
+          echo ${{needs.second_job.outputs.version}}
