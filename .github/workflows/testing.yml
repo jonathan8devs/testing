@@ -53,11 +53,18 @@ jobs:
         id: working_4
         run: echo ${{ env.version }}
   testing_1:
-    eeds: testing
+    name: ${{ env.version }}
+    needs: testing
     runs-on: ubuntu-latest
-      - name: "Step output: ${{steps.working_1.outputs.version}}"
+    steps:
+      - env:
+          version: ${{needs.testing.outputs.version}}
+      - name: "ENV: ${{ env.version }}"
         id: working_4
+        run: echo ${{ env.version }}
+      - name: "Step output: ${{steps.working_1.outputs.version}}"
+        id: working_5
         run: echo ${{steps.working_1.outputs.version}}
       - name: "ENV: ${{ env.version }}"
-        id: working_5
-        run: echo ${{ env.version }}
+        id: working_6
+        run: echo $version
