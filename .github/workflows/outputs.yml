@@ -33,4 +33,5 @@ jobs:
         id: job_1_step_2
         run: |
           echo "An dieser Stelle starte ich den 2 Step."
-          echo ""
+          echo ${{ steps.job_1_step_1.outputs.version }}
+          echo ${{needs.first_job.outputs.version}}
