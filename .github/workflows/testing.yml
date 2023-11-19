@@ -8,7 +8,6 @@ on:
 jobs:
   job_1:
     name: "Job Name: ${{ github.event.inputs.version }} by github.event.inputs.version"
-
     runs-on: ubuntu-latest
     steps:
       - name: Definition und Ausgabe

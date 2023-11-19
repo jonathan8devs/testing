@@ -14,9 +14,10 @@ jobs:
         id: job_1_step_1
         run: |
           echo "An dieser Stelle nehme ich das Inputfield für die weitere Verwendung als Output"
-          echo "Das Inputfield kann via $""{{ github.event.inputs.version }} abgerufen werden"
+          echo "Das Inputfield kann via $""{{ github.event.inputs.version }} abgerufen werden und enthält aktuell: ${{ github.event.inputs.version }}"
+          echo ""
+          echo "Nun schreibe ich den Inhalt von $""{{ github.event.inputs.version }} in die Outputs"
           echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+
           # Direkte Ausgabe
-          echo ${{needs.testing.outputs.version}}
-          # ist leer
-          echo ${{steps.working_1.outputs.version}}
+          echo ${{ steps.job_1_step_1.outputs.test }}
