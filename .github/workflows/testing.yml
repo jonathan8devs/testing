@@ -59,6 +59,7 @@ jobs:
     steps:
       - env:
           version: ${{needs.testing.outputs.version}}
+          run: echo "$OUTPUT1 $OUTPUT2"
       - name: "ENV: ${{ env.version }}"
         id: working_4
         run: echo ${{ env.version }}
