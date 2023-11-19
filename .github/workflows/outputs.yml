@@ -18,6 +18,6 @@ jobs:
           echo ""
           echo "Nun schreibe ich den Inhalt von $""{{ github.event.inputs.version }} in die Outputs"
           echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
-
-          # Direkte Ausgabe
+          echo "In dem Step in welchem in die Outputs definiert wurden können diese nicht abgerufen werden"
+          echo "Innerhalb dieses Steps wird $""{{ steps.job_1_step_1.outputs.test }} nicht ausgegeben:"
           echo ${{ steps.job_1_step_1.outputs.test }}
