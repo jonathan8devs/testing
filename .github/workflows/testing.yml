@@ -2,20 +2,13 @@ name: "Variablen innerhalb von Github Actions"
 on:
   workflow_dispatch:
     inputs:
-      branch:
-        type: boolean
-        description: "dev-Branch: There have been changes to the dev branch since the last release"
       version:
-        description: 'Version: Enter the version number (format: major.minor.patch)'
+        description: 'major.minor.patch'
         required: true
-      overwrite:
-        type: boolean
-        description: "Overwrite: An already released version should be overwritten"
 jobs:
-  testing:
-    name: "Check Requirements for ${{ github.event.inputs.version }}"
-    outputs:
-      version: ${{ steps.working_1.outputs.version }}
+  job_1:
+    name: "Job Name: ${{ github.event.inputs.version }} by github.event.inputs.version"
+
     runs-on: ubuntu-latest
     steps:
       - name: Definition und Ausgabe
@@ -52,8 +45,10 @@ jobs:
       - name: "ENV: ${{ env.version }}"
         id: working_4
         run: echo ${{ env.version }}
+    outputs:
+      version: ${{ steps.working_1.outputs.version }}
   testing_1:
-    name: ${{ env.version }}
+    name: asdas
     needs: testing
     runs-on: ubuntu-latest
     steps:
