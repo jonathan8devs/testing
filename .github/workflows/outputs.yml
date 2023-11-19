@@ -40,6 +40,7 @@ jobs:
           echo "Deswegen lege ich mal einen zweiten Job an und definiere dort die Outputs bereits im Job selbst."
   second_job:
     name: Zweiter Job
+    needs: first_job
     runs-on: ubuntu-latest
     steps:
       - name: First Step from second Job
