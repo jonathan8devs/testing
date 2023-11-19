@@ -18,7 +18,7 @@ jobs:
       version: ${{ steps.working_1.outputs.version }}
     runs-on: ubuntu-latest
     steps:
-      - name: Funktioniert nicht!
+      - name: Definition und Ausgabe
         id: working_1
         run: |
           echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
@@ -35,10 +35,20 @@ jobs:
 
           version="${{ github.event.inputs.version }}"
           echo $version
-      - name: Funktioniert nicht!
-        id: not_work_1
+      - name: Ausgabe
+        id: working_2
         run: |
+          # Wird nicht angezeigt:
           echo ${{needs.testing.outputs.version}}
+          # Wird angezeigt
           echo ${{steps.working_1.outputs.version}}
+          # Wird angezeigt
           echo ${{ env.version }}
+          # Wird nicht angezeigt
           echo $VERSION
+      - name: "Step output: ${{steps.working_1.outputs.version}}"
+        id: working_3
+        run: echo ${{steps.working_1.outputs.version}}
+      - name: "ENV: ${{ env.version }}"
+        id: working_4
+        run: echo ${{ env.version }}
