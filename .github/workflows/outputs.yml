@@ -20,7 +20,7 @@ jobs:
           echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
           echo "In dem Step in welchem in die Outputs definiert wurden können diese nicht abgerufen werden"
           echo "Innerhalb dieses Steps wird $""{{ steps.job_1_step_1.outputs.version }} nicht ausgegeben:"
-          echo ${{ steps.job_1_step_1.outputs.version }}
+          echo ${{steps.job_1_step_1.outputs.version}}
           echo "Auch die globale Variable, welche nicht den Step sondern den Job als Referenz hat $""{{needs.first_job.outputs.version}}, wird nicht ausgegeben:"
           echo ${{needs.first_job.outputs.version}}
           echo "Daraus ergibt sich, dass innerhalb des Steps, in welcher das Output definiert wurde man sich mit Variablen behelfen muss:"
@@ -33,5 +33,17 @@ jobs:
         id: job_1_step_2
         run: |
           echo "An dieser Stelle starte ich den 2 Step."
+          echo "Innerhalb dieses Steps wird $""{{ steps.job_1_step_1.outputs.version }} ausgegeben:"
           echo ${{ steps.job_1_step_1.outputs.version }}
+          echo "Solange ich in Step 1 von Job 1 nicht die Outputs explizit ausliefere funktioniert $""{{needs.first_job.outputs.version}} nicht."
+          echo ${{needs.first_job.outputs.version}}
+          echo "Deswegen lege ich mal einen zweiten Job an und definiere dort die Outputs bereits im Job selbst."
+  second_job:
+    name: Zweiter Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: First Step from second Job
+        id: job_2_step_1
+        run: |
+          echo "Ich beginne als erstes mal mit der Job-referenzierten Variable $""{{needs.first_job.outputs.version}}"
           echo ${{needs.first_job.outputs.version}}
