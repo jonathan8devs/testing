@@ -1,0 +1,22 @@
+# https://docs.github.com/en/actions/using-jobs/defining-outputs-for-jobs#example-defining-outputs-for-a-job
+name: "Outputs in Github Action"
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'major.minor.patch'
+        required: true
+jobs:
+  first_job:
+    name: Erster Job
+    runs-on: ubuntu-latest
+    steps:
+      - name:
+        run: |
+          echo "An dieser Stelle nehme ich das Inputfield für die weitere Verwendung als Output"
+          echo 'Das Inputfield kann via ${{ github.event.inputs.version }} abgerufen werden'
+          echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+          # Direkte Ausgabe
+          echo ${{needs.testing.outputs.version}}
+          # ist leer
+          echo ${{steps.working_1.outputs.version}}

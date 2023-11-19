@@ -3,3 +3,7 @@ Ich möchte herausfinden, welche Variablen ich in Github Actions wie verarbeiten
 
 ## Outputs
 
+Funktioniert:
+```yaml
+
+```

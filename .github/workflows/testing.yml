@@ -53,8 +53,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - env:
-        version: ${{needs.testing.outputs.version}}
-        run: echo ${{needs.testing.outputs.version}}
+        version: ${{needs.job_1.outputs.version}}
+        run: echo ${{needs.job_1.outputs.version}}
       - name: "ENV: ${{ env.version }}"
         id: working_4
         run: echo ${{ env.version }}
