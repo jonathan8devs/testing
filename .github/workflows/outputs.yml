@@ -21,3 +21,7 @@ jobs:
           echo "In dem Step in welchem in die Outputs definiert wurden können diese nicht abgerufen werden"
           echo "Innerhalb dieses Steps wird $""{{ steps.job_1_step_1.outputs.test }} nicht ausgegeben:"
           echo ${{ steps.job_1_step_1.outputs.test }}
+          echo "Daraus ergibt sich, dass innerhalb des Steps, in welcher das Output definiert wurde man sich mit Variablen behelfen muss:"
+          echo "VERSION=$""{{ github.event.inputs.version }}"
+          VERSION=${{ github.event.inputs.version }}
+          echo "Nun habe ich $""{{ github.event.inputs.version }} in $""VERSION geschrieben und diese enthält nun $VERSION"
